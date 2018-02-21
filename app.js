@@ -25,6 +25,7 @@ mongoose.connect("mongodb://localhost/socially");
 //======================================================
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
 
 
 //======================================================
@@ -35,7 +36,7 @@ app.set("view engine", "ejs");
 //======================================================
 //UTILIZING ROUTES
 //======================================================
-
+app.use("/", indexRoutes);
 
 //======================================================
 //INITIATE NODEJS TO START LISTENING REQUEST
