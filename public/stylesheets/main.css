@@ -1,7 +1,44 @@
+html, body {
+    height: 100%;
+}
+
+body{
+  padding-top: 50px;
+}
+
+img {
+    max-width: 100%;
+}
+
 .navbar {
   background-color: #2b85ff !important;
 }
 
-.form-inline{
+.form-inline.my-2.my-lg-0 {
+    text-align: center;
     margin: auto;
 }
+    
+#cover {
+    background: #222 url("https://www.sott.net/image/s16/339087/full/635926264209899292_594826024_g.jpg") 
+      center center no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+#cover-caption {
+  width: 100%;
+}
+
+.container {
+  padding: 0 10%;
+}
+
+.col-sm-10.col-sm-offset-1 {
+  margin: 0 auto;
+}
+
