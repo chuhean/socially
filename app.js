@@ -14,6 +14,7 @@ var express         = require("express"),
 //IMPORT ROUTES
 //======================================================
 var indexRoutes     = require("./routes/index");
+var mainRoutes     = require("./routes/main");
 
 //======================================================
 //CONNECT APPJS TO MONGODB DATABASE
@@ -37,6 +38,7 @@ app.use(express.static(__dirname + "/public"));
 //UTILIZING ROUTES
 //======================================================
 app.use("/", indexRoutes);
+app.use("/main", mainRoutes);
 
 //======================================================
 //INITIATE NODEJS TO START LISTENING REQUEST

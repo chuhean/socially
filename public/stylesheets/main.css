@@ -42,3 +42,22 @@ img {
   margin: 0 auto;
 }
 
+.landing-btn {
+  width: 30%;
+}
+
+.footer {
+  background-color: #171717;
+}
+.container-footer a {
+  color: #FFFFFF;
+}
+.container-footer {
+  color: #FFFFFF;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.footer-copyright {
+    font-size: 0.8rem;
+}

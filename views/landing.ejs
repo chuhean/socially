@@ -1,47 +1,81 @@
 <% include ./partials/header %>
 
+    <!-- Cover section of landing page -->
     <section id="cover">
         <div id="cover-caption">
             <div class="container">
                 <div class="col-sm-10 col-sm-offset-1">
                     <h3 class="display-4">Connecting Friends together</h2>
                     <p class="font-weight-bold">Socially helps you stay in touch with your friends.</p>
-                    <button type="submit" class="btn btn-success btn-lg">Sign up</button>
-                    <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                    <button type="submit" class="btn btn-success btn-lg landing-btn">Sign up</button>
+                    <button type="submit" class="btn btn-primary btn-lg landing-btn">Login</button>
                     <br>
                 </div>
             </div>
         </div>
     </section>
-        
-    <footer id="footer-main">
-        <div class="container">
+    
+    <!--Footer-->
+    <footer class="footer">
+      
+        <!--Footer Links-->
+        <div class="container text-center text-md-left container-footer">
             <div class="row">
-                <div class="col-sm-3">
-                    <p>Uncopyright 2018</p>
-                    <p>Coded by Steven</p>
-                </div>
-                <div class="col-sm-3">
+    
+                <!--First column-->
+                <div class="col-md-2 mx-auto">
+                    <h5 class="text-uppercase mb-4 mt-3 font-weight-bold"><a href="/">Socially</a></h5>
                     <ul class="list-unstyled">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">What we do</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Latest</a></li>
+                        <li><a href="#!">About</a></li>
+                        <li><a href="#!">Blog</a></li>
+                        <li><a href="#!">Careers</a></li>
+                        <li><a href="#!">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-3"></div>
+                <!--/.First column-->
+    
+                <hr class="clearfix w-100 d-md-none">
+    
+                <!--Second column-->
+                <div class="col-md-2 mx-auto">
+                    <h5 class="text-uppercase mb-4 mt-3 font-weight-bold"><a href="/">Developers</a></h5>
                     <ul class="list-unstyled">
-                        <li><a href="">Facebook</a></li>
-                        <li><a href="">Twitter</a></li>
-                        <li><a href="">Youtube</a></li>
-                        <li><a href="">LinkedIn</a></li>
+                        <li><a href="#!">Products</a></li>
+                        <li><a href="#!">Tools</a></li>
+                        <li><a href="#!">API</a></li>
+                        <li><a href="#!">Supports</a></li>
                     </ul>
-                <div class="col-sm-3">
-                    <h6>A tiny header</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, cumque quibusdam porro voluptatum dicta, maiores corporis ipsum mollitia amet quas rerum consectetur, deleniti reiciendis id. Molestias consequatur, odit natus atque.</p>
+                </div>
+                <!--/.Second column-->
+    
+                <hr class="clearfix w-100 d-md-none">
+    
+                <!--Third column-->
+                <div class="col-md-2 mx-auto">
+                    <h5 class="text-uppercase mb-4 mt-3 font-weight-bold "><a href="/">Help</a></h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#!">FAQ</a></li>
+                        <li><a href="#!">Help Center</a></li>
+                        <li><a href="#!">Privacy</a></li>
+                        <li><a href="#!">Terms</a></li>
+                    </ul>
+                </div>
+                <!--/.Third column-->
+            </div>
+
+            
+            <!--Copyright-->
+            <div class="footer-copyright py-3 text-center">
+                <div class="container-fluid">
+                    © 2018 Socially Inc.
                 </div>
             </div>
+            <!--/.Copyright-->
+  
         </div>
+        <!--/.Footer Links-->
+
     </footer>
+    <!--/.Footer-->
 
 <% include ./partials/footer %>
