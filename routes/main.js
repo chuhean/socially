@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
-router.get("/", function(req, res){
-    res.render("")
+router.get("/home", function(req, res){
+    res.render("main/home"); 
     // Campground.find({}, function(err, allCampgrounds){
     //     if(err){
     //         console.log(err);
@@ -10,7 +10,7 @@ router.get("/", function(req, res){
     //         res.render("campgrounds/index", {campgrounds:allCampgrounds, page: "campgrounds"});
     //     }
     // })
-})
+}); 
 
 // //CREATE - add new campground to DB
 // router.post("/", middleware.isLoggedIn, function(req, res){

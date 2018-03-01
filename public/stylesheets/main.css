@@ -1,13 +1,14 @@
 html, body {
-    height: 100%;
+  height: 100%;
 }
 
 body{
   padding-top: 50px;
+  background-color: #f2f2f2; 
 }
 
 img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .navbar {
@@ -15,19 +16,19 @@ img {
 }
 
 .form-inline.my-2.my-lg-0 {
-    text-align: center;
-    margin: auto;
+  text-align: center;
+  margin: auto;
 }
     
 #cover {
-    background: #222 url("https://www.sott.net/image/s16/339087/full/635926264209899292_594826024_g.jpg") 
-      center center no-repeat;
-    background-size: cover;
-    color: white;
-    height: 100%;
-    text-align: center;
-    display: flex;
-    align-items: center;
+  background: #222 url("https://www.sott.net/image/s16/339087/full/635926264209899292_594826024_g.jpg") 
+    center center no-repeat;
+  background-size: cover;
+  color: white;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 #cover-caption {
@@ -36,6 +37,12 @@ img {
 
 .container {
   padding: 0 10%;
+}
+
+.container-login-register {
+  margin: 5% auto;
+  vertical-align: middle;
+  width: 50%;
 }
 
 .col-sm-10.col-sm-offset-1 {
@@ -59,5 +66,25 @@ img {
 }
 
 .footer-copyright {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
+
+.container .card-center{
+  margin: 0.6rem auto;
+  width: 70%;
+}
+
+.login-register-title {
+  text-align: center;
+}
+
+input[type="date"]::before { 
+	content: attr(data-placeholder);
+	width: 100%;
+}
+
+/* hide our custom/fake placeholder text when in focus to show the default
+ * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
+ */
+input[type="date"]:focus::before,
+input[type="date"]:valid::before { display: none }
