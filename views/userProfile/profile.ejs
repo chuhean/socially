@@ -1,13 +1,8 @@
 <% include ../partials/header %>
 
 <% include ../partials/leftColumn %>
-
+        
 <div class="col-6 columns">
-    <div class="card card-center">
-        <div class="card-header card-post">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="What's on your mind?">
-        </div>
-    </div>
     <% user.friendPosts.forEach(function(friendPosts){ %>
         <% friendPosts.comments.populate(comments) %>
         <div class="card card-center">
@@ -30,7 +25,7 @@
         </div>
     <% }); %>
 </div>
-
+        
 <% include ../partials/rightColumn %>
 
 <% include ../partials/footer %>

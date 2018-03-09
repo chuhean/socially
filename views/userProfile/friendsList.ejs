@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+<% include ../partials/leftColumn %>
+        
+<div class="col-6 columns">
+    <div class="card card-center">
+        <% if(!currentUser){ %>
+            <p>User's Friends</p>
+        <% } else { %>
+            <p>Your Friends</p>
+        <% } %>
+    </div>
+    <div class="card card-center">
+        <div class="card-header card-post">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search your friends...">
+        </div>
+    </div>
+    <% user.friendPosts.forEach(function(friendPosts){ %>
+        <% friendPosts.comments.populate(comments) %>
+        <div class="card card-center">
+            <div class="card-body">
+                <h5 class="card-title"><%= friendPosts.author.firstName %> <%= friendPosts.author.lastName %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= friendPosts.date %></h6>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<% include ../partials/rightColumn %>
+
+<% include ../partials/footer %>
+

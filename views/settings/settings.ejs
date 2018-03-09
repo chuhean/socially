@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+
+<% include ../partials/leftColumn %>
+
+<div class="col-6 columns">
+    <div class="card card-center">
+        <div class="card-body">
+            <h4>Settings</h4>
+            <hr>
+            <form action="/settings?_method=PUT" method="POST">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" placeholder="<%= currentUser.firstName %>" readonly>
+                    </div>
+                    <div class="form-group col">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" placeholder="<%= currentUser.lastName %>" readonly>
+                    </div>  
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">About me</label>
+                    <textarea class="form-control" name="aboutMe" id="exampleFormControlTextarea1" rows="3"><%= currentUser.aboutMe %></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Picture</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= currentUser.email %>">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label>Birthday</label>
+                    <input class="form-control" type="text" placeholder="<%= currentUser.birthday %>" readonly>
+                </div> 
+                <div class="form-group">
+                    <label>Gender</label>
+                    <input class="form-control" type="text" placeholder="<%= currentUser.gender %>" readonly>
+                </div> 
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Change Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <a href="#" class="btn btn-danger">Delete Account</button>
+                <a href="/" class="btn btn-primary btn-settings" role="button">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-settings">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/rightColumn %>
+
+<% include ../partials/footer %>

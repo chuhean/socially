@@ -36,7 +36,7 @@ img {
 }
 
 .container {
-  padding: 0 10%;
+  padding: 0 5%;
 }
 
 .container-login-register {
@@ -59,6 +59,7 @@ img {
 .container-footer a {
   color: #FFFFFF;
 }
+
 .container-footer {
   color: #FFFFFF;
   padding-top: 2%;
@@ -69,9 +70,22 @@ img {
   font-size: 0.8rem;
 }
 
-.container .card-center{
-  margin: 0.6rem auto;
-  width: 70%;
+.columns {
+  padding: 0.6rem 0.4rem;
+  width: 100%;
+}
+
+.card-center {
+  margin: 0.5rem auto;
+  width: 100%;
+}
+
+.card-post {
+  border-bottom: transparent;
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
 }
 
 .login-register-title {
@@ -88,3 +102,9 @@ input[type="date"]::before {
  */
 input[type="date"]:focus::before,
 input[type="date"]:valid::before { display: none }
+
+.btn-settings {
+  margin: 0 0.1rem;
+  float: right;
+}
+

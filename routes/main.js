@@ -1,8 +1,20 @@
 var express = require("express");
 var router = express.Router();
+var middleware = require("../middleware");
+var User = require("../models/user");
 
-router.get("/home", function(req, res){
-    res.render("main/home"); 
+router.get("/home", middleware.isLoggedIn, function(req, res){
+    User.findById(req.user._id).populate("friendPosts").exec(function(err, foundUser){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("main/home", {user: foundUser, page:"main/home"}); 
+        }
+    });
+}); 
+
+router.get("/messages", middleware.isLoggedIn, function(req, res){
+    res.render("main/messages", {page:"main/messages"}); 
     // Campground.find({}, function(err, allCampgrounds){
     //     if(err){
     //         console.log(err);
@@ -11,6 +23,18 @@ router.get("/home", function(req, res){
     //     }
     // })
 }); 
+
+router.get("/notifications", middleware.isLoggedIn, function(req, res){
+    res.render("main/notifications", {page:"main/notifications"}); 
+    // Campground.find({}, function(err, allCampgrounds){
+    //     if(err){
+    //         console.log(err);
+    //     } else{
+    //         res.render("campgrounds/index", {campgrounds:allCampgrounds, page: "campgrounds"});
+    //     }
+    // })
+}); 
+
 
 // //CREATE - add new campground to DB
 // router.post("/", middleware.isLoggedIn, function(req, res){
