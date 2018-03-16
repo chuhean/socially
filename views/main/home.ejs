@@ -5,30 +5,18 @@
 <div class="col-6 columns">
     <div class="card card-center">
         <div class="card-header card-post">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="What's on your mind?">
+            <form action="/main/home" id="homePagePostForm">
+                <input type="text" class="form-control" id="homePagePostInput" name="post[text]" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
+                       placeholder="What's on your mind, <%= user.firstName %>?">
+                <input type="button" id="homePagePostInputButton" style="display:none">
+            </form>
         </div>
     </div>
-    <% user.friendPosts.forEach(function(friendPosts){ %>
-        <% friendPosts.comments.populate(comments) %>
-        <div class="card card-center">
-            <div class="card-body">
-                <h5 class="card-title"><%= friendPosts.author.firstName %> <%= friendPosts.author.lastName %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= friendPosts.date %></h6>
-                <p class="card-text"><%= friendPosts.text %></p>
-                <a href="#" class="card-link"><i class="far fa-thumbs-up"></i> friendPosts.likes.author.length</a>
-                <a href="#" class="card-link"><i class="far fa-comment"></i> friendPosts.comments.comments.length</a>
-                <a href="#" class="card-link"><i class="far fa-share-square"></i></a>
-            </div>
-            <div class="card-header">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Write a comment...">
-            </div>
-            <ul class="list-group list-group-flush">
-                <% friendPosts.comments.comments.forEach(function(comments){ %>
-                    <li class="list-group-item"><%= comments %></li>
-                <% }); %>
-            </ul>
-        </div>
-    <% }); %>
+    
+    <div id="homePagePosts">
+        <% include ../ajaxSnippets/mainHome %>
+    </div>
+
 </div>
 
 <% include ../partials/rightColumn %>

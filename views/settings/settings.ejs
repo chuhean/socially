@@ -11,16 +11,16 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label>First Name</label>
-                        <input class="form-control" type="text" placeholder="<%= currentUser.firstName %>" readonly>
+                        <input class="form-control" type="text" placeholder="<%= user.firstName %>" readonly>
                     </div>
                     <div class="form-group col">
                         <label>Last Name</label>
-                        <input class="form-control" type="text" placeholder="<%= currentUser.lastName %>" readonly>
+                        <input class="form-control" type="text" placeholder="<%= user.lastName %>" readonly>
                     </div>  
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">About me</label>
-                    <textarea class="form-control" name="aboutMe" id="exampleFormControlTextarea1" rows="3"><%= currentUser.aboutMe %></textarea>
+                    <textarea class="form-control" name="aboutMe" id="exampleFormControlTextarea1" rows="3"><%= user.aboutMe %></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Picture</label>
@@ -28,16 +28,16 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= currentUser.email %>">
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= user.email %>">
                     <small id="emailHelp" class="form-text text-muted"></small>
                 </div>
                 <div class="form-group">
                     <label>Birthday</label>
-                    <input class="form-control" type="text" placeholder="<%= currentUser.birthday %>" readonly>
+                    <input class="form-control" type="text" placeholder="<%= user.birthday %>" readonly>
                 </div> 
                 <div class="form-group">
                     <label>Gender</label>
-                    <input class="form-control" type="text" placeholder="<%= currentUser.gender %>" readonly>
+                    <input class="form-control" type="text" placeholder="<%= user.gender %>" readonly>
                 </div> 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Change Password</label>

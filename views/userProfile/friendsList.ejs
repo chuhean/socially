@@ -4,26 +4,28 @@
         
 <div class="col-6 columns">
     <div class="card card-center">
-        <% if(!currentUser){ %>
-            <p>User's Friends</p>
-        <% } else { %>
-            <p>Your Friends</p>
-        <% } %>
+        <div class="card-header card-post">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
+            placeholder="Search friends list...">
+        </div>
     </div>
     <div class="card card-center">
-        <div class="card-header card-post">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search your friends...">
+        <div class="card-body">
+            <% if(!currentUser){ %>
+                <h4><%= user.firstName %>'s Friends</h4>
+            <% } else { %>
+                <h4>Your Friends</h4>
+            <% } %>
+            <hr>
+            <% user.friends.forEach(function(friend){ %>
+                <div class="card card-center">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= friend.firstName %> <%= friend.lastName %></h5>
+                    </div>
+                </div>
+            <% }); %>
         </div>
     </div>
-    <% user.friendPosts.forEach(function(friendPosts){ %>
-        <% friendPosts.comments.populate(comments) %>
-        <div class="card card-center">
-            <div class="card-body">
-                <h5 class="card-title"><%= friendPosts.author.firstName %> <%= friendPosts.author.lastName %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= friendPosts.date %></h6>
-            </div>
-        </div>
-    <% }); %>
 </div>
 
 <% include ../partials/rightColumn %>

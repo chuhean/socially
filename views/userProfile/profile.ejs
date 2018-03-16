@@ -3,23 +3,22 @@
 <% include ../partials/leftColumn %>
         
 <div class="col-6 columns">
-    <% user.friendPosts.forEach(function(friendPosts){ %>
-        <% friendPosts.comments.populate(comments) %>
+    <% user.posts.forEach(function(posts){ %>
         <div class="card card-center">
             <div class="card-body">
-                <h5 class="card-title"><%= friendPosts.author.firstName %> <%= friendPosts.author.lastName %></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= friendPosts.date %></h6>
-                <p class="card-text"><%= friendPosts.text %></p>
-                <a href="#" class="card-link"><i class="far fa-thumbs-up"></i> friendPosts.likes.author.length</a>
-                <a href="#" class="card-link"><i class="far fa-comment"></i> friendPosts.comments.comments.length</a>
+                <h5 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= posts.author.firstName %> <%= posts.author.lastName %></a></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><%= posts.date %></h6>
+                <p class="card-text"><%= posts.text %></p>
+                <a href="#" class="card-link"><i class="far fa-thumbs-up"></i> <%= posts.likes.length %></a>
+                <a href="#" class="card-link"><i class="far fa-comment"></i> <%= posts.comments.length %></a>
                 <a href="#" class="card-link"><i class="far fa-share-square"></i></a>
             </div>
             <div class="card-header">
                 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Write a comment...">
             </div>
             <ul class="list-group list-group-flush">
-                <% friendPosts.comments.comments.forEach(function(comments){ %>
-                    <li class="list-group-item"><%= comments %></li>
+                <% posts.comments.forEach(function(comment){ %>
+                    <li class="list-group-item"><%= comment.text %></li>
                 <% }); %>
             </ul>
         </div>

@@ -5,13 +5,31 @@
         <!-- Bootstrap columns -->
         <div class="col columns left-columns">
             <div class="card card-center">
-                <img class="card-img-top" src="..." alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title"><%= currentUser.firstName %> <%= currentUser.lastName %></h5>
-                    <a href="#" class="card-link">Friends</a>
-                    <a href="#" class="card-link">Posts</a>
-                    <a href="#" class="card-link">Add Friend</a>
-                    <a href="#" class="card-link">Message</a>
+                    <h4 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= user.firstName %> <%= user.lastName %></a></h4>
+                    <% if(currentUser && user._id.equals(currentUser._id)){ %>
+                        <p class="card-text left-user-detail"><i class="fas fa-birthday-cake"></i> <%= user.birthday %></p>
+                    <% } %>
+                    <% if(user.gender === "Male"){ %>
+                        <p class="card-text"><i class="fas fa-mars"></i> <%= user.gender %></p>
+                    <% } else { %>
+                        <p class="card-text"><i class="fas fa-venus"></i> <%= user.gender %></p>
+                    <% } %>
+                    <p class="card-text"><%= user.aboutMe %></p>
+                    <div class="row left-column-user-detail">
+                        <a href="/profile/<%= user._id %>/friendslist" class="col columns left-anchor-user-detail">
+                            <span class="card-title left-span-user-detail">Friends:</span>
+                            <span class="card-link left-span-user-detail left-second-span-user-detail"><%= user.friends.length %></span>
+                        </a>
+                        <a href="/profile/<%= user._id %>" class="col columns left-anchor-user-detail">
+                            <span class="card-title left-span-user-detail">Posts:</span>
+                            <span class="card-link left-span-user-detail left-second-span-user-detail"><%= user.posts.length %></span>
+                        </a>
+                    </div>
+                    <% if(user._id !== currentUser._id){ %>
+                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> Add Friend</a>
+                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-comments"></i> Message</a>
+                    <% } %>
                 </div>
             </div>
         </div>

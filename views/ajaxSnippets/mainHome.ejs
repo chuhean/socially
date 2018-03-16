@@ -1,0 +1,22 @@
+<% user.friendPosts.forEach(function(friendPosts){ %>
+    <div class="card card-center">
+        <div class="card-body">
+            <h5 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= friendPosts.author.firstName %> <%= friendPosts.author.lastName %></a></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= friendPosts.date %></h6>
+            <p class="card-text"><%= friendPosts.text %></p>
+            <a href="#" class="card-link"><i class="far fa-thumbs-up"></i> <%= friendPosts.likes.length %></a>
+            <a href="#" class="card-link"><i class="far fa-comment"></i> <%= friendPosts.comments.length %></a>
+            <a href="#" class="card-link"><i class="far fa-share-square"></i></a>
+        </div>
+        <div class="card-header">
+            <form id="<%= friendPosts._id %>" class="homePageCommentForm">
+                <input type="text" class="form-control" id="<%= friendPosts._id %>-homePageCommentInput" class="homePageCommentInput" name="comment[text]" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
+                       placeholder="Write a comment...">
+                <input type="button" id="<%= friendPosts._id %>-homePageCommentButton" class="homePageCommentButton" style="display:none">
+            </form>
+        </div>
+        <div id="<%= friendPosts._id %>-homePageComments" class="homePageComments">
+            <% include ../ajaxSnippets/mainHomeComment %>
+        </div>
+    </div>
+<% }); %>

@@ -9,24 +9,27 @@ var UserSchema  = new mongoose.Schema({
     birthday: {type: String, required: true}, 
     gender: {type: String, required: true}, 
     password: String,
-    friend: [
+    friends: [
+        //User ID
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }
     ],
-    post: [
+    posts: [
+        //Post ID
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"
         }
     ],
     friendPosts: [
+        //Post ID
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"
         }
-    ],
+    ]
 });
 
 UserSchema.plugin(passportLocalMongoose, {usernameField: "email"});

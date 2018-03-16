@@ -80,6 +80,10 @@ img {
   width: 100%;
 }
 
+.post-user {
+  color: #000000;
+}
+
 .card-post {
   border-bottom: transparent;
 }
@@ -108,3 +112,31 @@ input[type="date"]:valid::before { display: none }
   float: right;
 }
 
+.left-column-user-detail{
+  margin-left: auto;
+  margin-bottom: 1rem;
+}
+
+.left-user-detail{
+  margin-bottom: 0;
+}
+
+.left-anchor-user-detail {
+  padding: 0;
+  color: #000000;
+  overflow: hidden;
+}
+
+.left-span-user-detail {
+  margin: 0;
+  float: left;
+  clear: left;
+}
+
+.left-second-span-user-detail {
+  font-size: 2rem;
+}
+
+.comment-section {
+  margin: 0;
+}

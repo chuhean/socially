@@ -5,9 +5,10 @@
         <!-- Make site responsive on mobile/tablet -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Socially</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/stylesheets/main.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <link rel="icon" href="/favicon.ico?" type="image/icon">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     </head>
     
     <!-- HTML Body -->
@@ -58,8 +59,8 @@
                               <%= currentUser.firstName %>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="/profile">My Profile</a>
-                              <a class="dropdown-item" href="/profile/friendslist">Friends List</a>
+                              <a class="dropdown-item" href="/profile/<%= currentUser._id %>">My Profile</a>
+                              <a class="dropdown-item" href="/profile/<%= currentUser._id %>/friendslist">Friends List</a>
                               <a class="dropdown-item" href="/settings">Settings</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="/logout">Logout</a>

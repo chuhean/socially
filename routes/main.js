@@ -2,120 +2,152 @@ var express = require("express");
 var router = express.Router();
 var middleware = require("../middleware");
 var User = require("../models/user");
+var Post = require("../models/post");
+var Comment = require("../models/comment");
 
 router.get("/home", middleware.isLoggedIn, function(req, res){
-    User.findById(req.user._id).populate("friendPosts").exec(function(err, foundUser){
+    User
+        .findById(req.user._id)
+        .populate({
+            path: 'friendPosts',
+            populate: [{
+                path: 'author',
+            },
+            {
+                path: 'likes',
+            },
+            {
+                path: 'comments',
+                populate: [{
+                    path: 'author'
+                }]
+            }]
+        })
+    .exec(function(err, currentUser){
         if(err){
             console.log(err);
         } else {
-            res.render("main/home", {user: foundUser, page:"main/home"}); 
+            res.render("main/home", {user: currentUser, page:"main/home"}); 
+        }
+    });
+});
+
+router.get("/messages", middleware.isLoggedIn, function(req, res){
+    User.findById(req.user._id, function(err, currentUser){
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        } else {
+            res.render("main/messages", {page:"main/messages"});
         }
     });
 }); 
 
-router.get("/messages", middleware.isLoggedIn, function(req, res){
-    res.render("main/messages", {page:"main/messages"}); 
-    // Campground.find({}, function(err, allCampgrounds){
-    //     if(err){
-    //         console.log(err);
-    //     } else{
-    //         res.render("campgrounds/index", {campgrounds:allCampgrounds, page: "campgrounds"});
-    //     }
-    // })
-}); 
-
 router.get("/notifications", middleware.isLoggedIn, function(req, res){
-    res.render("main/notifications", {page:"main/notifications"}); 
-    // Campground.find({}, function(err, allCampgrounds){
-    //     if(err){
-    //         console.log(err);
-    //     } else{
-    //         res.render("campgrounds/index", {campgrounds:allCampgrounds, page: "campgrounds"});
-    //     }
-    // })
+    User.findById(req.user._id, function(err, currentUser){
+        if(err){
+            console.log(err);
+            res.redirect("back");
+        } else {
+            res.render("main/notifications", {user: currentUser, page:"main/notifications"}); 
+        }
+    });
 }); 
 
+router.post("/home", middleware.isLoggedIn, function(req, res){
+    User.findById(req.user._id, function(err, currentUser){
+        if(err){
+            console.log(err);
+        } else {
+            Post.create(req.body.post, function(err, post){
+                if(err || req.body.post.text == ""){
+                    console.log(err);
+                } else {
+                    post.author = req.user._id;
+                    post.save(function(err, savedPost){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            currentUser.posts.unshift(savedPost._id);
+                            currentUser.friendPosts.unshift(savedPost._id);
+                            currentUser.save();
+                            res.redirect("/main/home/ajaxpost");
+                        }
+                    });
+                }
+            });    
+        }
+    });
+});
 
-// //CREATE - add new campground to DB
-// router.post("/", middleware.isLoggedIn, function(req, res){
-//   // get data from form and add to campgrounds array
-//   var name = req.body.name;
-//   var image = req.body.image;
-//   var desc = req.body.description;
-//   var author = {
-//       id: req.user._id,
-//       username: req.user.username
-//   }
-//   var cost = req.body.cost;
-//   geocoder.geocode(req.body.location, function (err, data) {
-//     var lat = data.results[0].geometry.location.lat;
-//     var lng = data.results[0].geometry.location.lng;
-//     var location = data.results[0].formatted_address;
-//     var newCampground = {name: name, image: image, description: desc, cost: cost, author:author, location: location, lat: lat, lng: lng};
-//     // Create a new campground and save to DB
-//     Campground.create(newCampground, function(err, newlyCreated){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             //redirect back to campgrounds page
-//             console.log(newlyCreated);
-//             res.redirect("/campgrounds");
-//         }
-//     });
-//   });
-// });
+router.get("/home/ajaxpost", middleware.isLoggedIn, function(req, res) {
+    User
+        .findById(req.user._id)
+        .populate({
+            path: 'friendPosts',
+            populate: [{
+                path: 'author',
+            },
+            {
+                path: 'likes',
+            },
+            {
+                path: 'comments',
+                populate: [{
+                    path: 'author'
+                }]
+            }]
+        })
+    .exec(function(err, currentUser){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("ajaxSnippets/mainHome", {user: currentUser}); 
+        }
+    });
+});
 
-// router.get("/new", middleware.isLoggedIn, function(req, res){
-//     res.render("campgrounds/new");
-// });
+router.post("/home/comment/:id", middleware.isLoggedIn, function(req, res){
+    Post.findById(req.params.id, function(err, foundPost){
+        if(err){
+            console.log(err);
+        } else {
+            Comment.create(req.body.comment, function(err, comment){
+                if(err || req.body.comment.text == ""){
+                    console.log(err);
+                } else {
+                    comment.author = req.user._id;
+                    comment.save(function(err, savedComment){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            foundPost.comments.unshift(savedComment._id);
+                            foundPost.save();
+                            res.redirect("/main/home/ajaxcomment/" + foundPost._id);
+                        }
+                    });
+                }
+            });    
+        }
+    });
+});
 
-// router.get("/:id", function(req, res){
-//     Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
-//         if(err || !foundCampground){
-//             req.flash("error", "Campground not found.");
-//             res.redirect("back");
-//         } else{
-//             res.render("campgrounds/show", {campground: foundCampground});
-//         }
-//     });
-// });
-
-// router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
-//     Campground.findById(req.params.id, function(err, foundCampground){
-//         res.render("campgrounds/edit", {campground: foundCampground});
-//     });
-// });
-
-// router.put("/:id", function(req, res){
-//   geocoder.geocode(req.body.location, function (err, data) {
-//     var lat = data.results[0].geometry.location.lat;
-//     var lng = data.results[0].geometry.location.lng;
-//     var location = data.results[0].formatted_address;
-//     var newData = {name: req.body.name, image: req.body.image, description: req.body.description, cost: req.body.cost, location: location, lat: lat, lng: lng};
-//     Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
-//         if(err){
-//             req.flash("error", err.message);
-//             res.redirect("back");
-//         } else {
-//             req.flash("success","Successfully Updated!");
-//             res.redirect("/campgrounds/" + campground._id);
-//         }
-//     });
-//   });
-// });
-
-// router.delete("/:id", middleware.checkCampgroundOwnership,function(req, res){
-//     Campground.findByIdAndRemove(req.params.id, function(err){
-//         if(err){
-//             res.redirect("/campgrounds");
-//         } else {
-//             res.redirect("/campgrounds");
-//         }
-//     });
-// });
-
-// router.get("/:comment_id/edit", function(req, res){
-//     res.send
-// })
+router.get("/home/ajaxcomment/:id", middleware.isLoggedIn, function(req, res) {
+    Post
+        .findById(req.params.id)
+        .populate({
+            path: 'comments',
+            populate: [{
+                path: 'author'
+            }]
+        })
+    .exec(function(err, post){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("ajaxSnippets/mainHomeComment", {friendPosts: post}); 
+        }
+    });
+});
 
 module.exports = router;
