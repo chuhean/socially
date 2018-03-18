@@ -1,3 +1,4 @@
+/*HTML and Body*/
 html, body {
   height: 100%;
 }
@@ -7,19 +8,15 @@ body{
   background-color: #f2f2f2; 
 }
 
+.container {
+  padding: 0 5%;
+}
+
+/*Landing page*/
 img {
   max-width: 100%;
 }
 
-.navbar {
-  background-color: #2b85ff !important;
-}
-
-.form-inline.my-2.my-lg-0 {
-  text-align: center;
-  margin: auto;
-}
-    
 #cover {
   background: #222 url("https://www.sott.net/image/s16/339087/full/635926264209899292_594826024_g.jpg") 
     center center no-repeat;
@@ -35,8 +32,14 @@ img {
   width: 100%;
 }
 
-.container {
-  padding: 0 5%;
+.landing-btn {
+  width: 30%;
+}
+
+/*Sign up/Login page*/
+.form-inline.my-2.my-lg-0 {
+  text-align: center;
+  margin: auto;
 }
 
 .container-login-register {
@@ -49,13 +52,39 @@ img {
   margin: 0 auto;
 }
 
-.landing-btn {
-  width: 30%;
+.login-register-title {
+  text-align: center;
 }
+
+input[type="date"]::before { 
+	content: attr(data-placeholder);
+	width: 100%;
+}
+
+/* hide our custom/fake placeholder text when in focus to show the default
+ * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
+ */
+input[type="date"]:focus::before,
+input[type="date"]:valid::before { display: none }
+
+/*Navbar*/
+.navbar {
+  background-color: #2b85ff !important;
+}
+
+/*Search Result*/
+.searchBar {
+  position: relative;
+  width: 100%;
+  top: -1px;
+}
+
+/*Footer*/
 
 .footer {
   background-color: #171717;
 }
+    
 .container-footer a {
   color: #FFFFFF;
 }
@@ -68,6 +97,33 @@ img {
 
 .footer-copyright {
   font-size: 0.8rem;
+}
+
+/*Main Home Page*/
+
+.left-user-detail{
+  margin-bottom: 0;
+}
+
+.left-anchor-user-detail {
+  padding: 0;
+  color: #000000;
+  overflow: hidden;
+}
+
+.left-span-user-detail {
+  margin: 0;
+  float: left;
+  clear: left;
+}
+
+.left-second-span-user-detail {
+  font-size: 2rem;
+}
+
+.left-column-user-detail{
+  margin-left: auto;
+  margin-bottom: 1rem;
 }
 
 .columns {
@@ -92,51 +148,16 @@ img {
   font-size: 0.75rem;
 }
 
-.login-register-title {
-  text-align: center;
+.comment-section {
+  margin: 0;
 }
 
-input[type="date"]::before { 
-	content: attr(data-placeholder);
-	width: 100%;
-}
-
-/* hide our custom/fake placeholder text when in focus to show the default
- * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
- */
-input[type="date"]:focus::before,
-input[type="date"]:valid::before { display: none }
+/*Setting Page*/
 
 .btn-settings {
   margin: 0 0.1rem;
   float: right;
 }
 
-.left-column-user-detail{
-  margin-left: auto;
-  margin-bottom: 1rem;
-}
 
-.left-user-detail{
-  margin-bottom: 0;
-}
 
-.left-anchor-user-detail {
-  padding: 0;
-  color: #000000;
-  overflow: hidden;
-}
-
-.left-span-user-detail {
-  margin: 0;
-  float: left;
-  clear: left;
-}
-
-.left-second-span-user-detail {
-  font-size: 2rem;
-}
-
-.comment-section {
-  margin: 0;
-}

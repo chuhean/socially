@@ -8,7 +8,9 @@ var express         = require("express"),
     flash           = require("connect-flash"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local"),
-    methodOverride  = require("method-override");
+    methodOverride  = require("method-override"),
+    helmet          = require("helmet"),
+    compression     = require('compression');
     
 //======================================================
 //IMPORT MONGOOSE MODEL
@@ -24,7 +26,7 @@ var User            = require("./models/user"),
 var indexRoutes     = require("./routes/index");
 var mainRoutes      = require("./routes/main");
 var profileRoutes   = require("./routes/profile");
-var settingsRoutes   = require("./routes/settings");
+var settingsRoutes  = require("./routes/settings");
 
 //======================================================
 //CONNECT APPJS TO MONGODB DATABASE
@@ -39,6 +41,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(helmet());
+app.use(compression());
 
 //======================================================
 //PASSPORTJS CONFIGURATION

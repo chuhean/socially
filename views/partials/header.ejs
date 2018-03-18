@@ -24,6 +24,7 @@
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 
+                <!--Navbar menu-->
                 <% if(!currentUser){ %>
                 
                 <% } else { %>
@@ -38,14 +39,22 @@
                             <a class="nav-link" href="/main/notifications"><i class="fas fa-bell"></i> Notifications</a>
                         </li>
                     </ul>
+                    <!--Search bar-->
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="search" name="search" id="search" placeholder="Search..." aria-label="Search">
                         <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                        <!--Search Result-->
+                        <!--<div class="searchBar">-->
+                        <!--    <div class="border" id="searchResult">-->
+                        <!--    </div>-->
+                        <!--</div>-->
                     </form> 
+                    
                 <% } %>
             
                 <ul class="navbar-nav ml-auto">
                     
+                    <!--Sign up/login menu-->
                     <% if(!currentUser){ %>
                         <li class="nav-item">
                             <a class="nav-link" href="/signup"><i class="fas fa-user-plus"></i> Sign Up</a>
@@ -54,6 +63,7 @@
                             <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
                         </li>
                     <% } else { %>
+                        <!--Signed in dropdown menu-->
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <%= currentUser.firstName %>

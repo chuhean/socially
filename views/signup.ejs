@@ -3,21 +3,27 @@
 <div class="container container-login-register">
     <h3 class="display-4 login-register-title">Sign Up</h2>
     <br>
+    <!--Sign up form-->
     <form action="/signup" method="POST">
         <div class="form-row">
+            <!--Sign up first name-->
             <div class="form-group col">
                 <input class="form-control" type="text" name="firstName" placeholder="First Name">
             </div>
+            <!--Sign up last name-->
             <div class="form-group col">
                 <input class="form-control float" type="text" name="lastName" placeholder="Last Name">
             </div>
         </div>
+        <!--Sign up email address-->
         <div class="form-group">
             <input class="form-control" type="email" name="email" placeholder="Email Address">
         </div>
+        <!--Sign up birthday-->
         <div class="form-group">
             <input class="form-control" type="date" name="birthday" data-placeholder="Birthday" required>
         </div>
+        <!--Sign up gender-->
         <div class="form-check form-check-inline">
             <p>Gender:</p>
         </div>
@@ -29,12 +35,15 @@
             <input class="form-check-input" type="radio" id="female" name="gender" value="Female"> 
             <label class="form-check-label" for="female">Female</label>
         </div>
+        <!--Sign up password-->
         <div class="form-group">
             <input class="form-control" type="password" name="password" placeholder="Password">
         </div>
+        <!--Confirm sign up password-->
         <div class="form-group">
             <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm Password">
         </div>
+        <!--Sign up button-->
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block">Sign Up</button>
         </div>

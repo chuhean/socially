@@ -6,6 +6,7 @@
         <div class="col columns left-columns">
             <div class="card card-center">
                 <div class="card-body">
+                    <!--User details-->
                     <h4 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= user.firstName %> <%= user.lastName %></a></h4>
                     <% if(currentUser && user._id.equals(currentUser._id)){ %>
                         <p class="card-text left-user-detail"><i class="fas fa-birthday-cake"></i> <%= user.birthday %></p>
@@ -23,9 +24,14 @@
                         </a>
                         <a href="/profile/<%= user._id %>" class="col columns left-anchor-user-detail">
                             <span class="card-title left-span-user-detail">Posts:</span>
-                            <span class="card-link left-span-user-detail left-second-span-user-detail"><%= user.posts.length %></span>
+                            <span class="card-link left-span-user-detail left-second-span-user-detail">
+                                <div id="userPostsLength">
+                                    <%= user.posts.length %>
+                                </div>
+                            </span>
                         </a>
                     </div>
+                    <!--Add friend or message-->
                     <% if(user._id !== currentUser._id){ %>
                         <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> Add Friend</a>
                         <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-comments"></i> Message</a>

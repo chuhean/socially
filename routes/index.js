@@ -1,11 +1,11 @@
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
-var middleware = require("../middleware");
-var User = require("../models/user");
+var express     = require("express");
+var router      = express.Router();
+var passport    = require("passport");
+var middleware  = require("../middleware");
+var User        = require("../models/user");
 
 //======================================================
-//GET ROUTES
+//LANDING, LOGIN, SIGN UP ROUTES
 //======================================================
 //show landing page
 router.get("/", middleware.isNotLoggedIn, function(req, res){
@@ -23,7 +23,7 @@ router.get("/signup", middleware.isNotLoggedIn, function(req, res){
 });
 
 //=========================================================
-//AUTH ROUTES
+//AUTH ROUTES FOR LOGIN
 //=========================================================
 //handle sign up logic
 router.post("/signup", middleware.isNotLoggedIn, function(req, res){
@@ -57,7 +57,7 @@ router.post("/login", middleware.isNotLoggedIn, passport.authenticate("local",
 });
 
 //=========================================================
-//AUTH ROUTES
+//AUTH ROUTES FOR LOGOUT
 //=========================================================
 
 //logout route

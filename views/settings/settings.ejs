@@ -7,7 +7,9 @@
         <div class="card-body">
             <h4>Settings</h4>
             <hr>
+            <!--User settings details-->
             <form action="/settings?_method=PUT" method="POST">
+                <!--User first and last name-->
                 <div class="form-row">
                     <div class="form-group col">
                         <label>First Name</label>
@@ -18,32 +20,40 @@
                         <input class="form-control" type="text" placeholder="<%= user.lastName %>" readonly>
                     </div>  
                 </div>
+                <!--User about me-->
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">About me</label>
                     <textarea class="form-control" name="aboutMe" id="exampleFormControlTextarea1" rows="3"><%= user.aboutMe %></textarea>
                 </div>
+                <!--User profile picture-->
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Picture</label>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1">
                 </div>
+                <!--User email address-->
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= user.email %>">
                     <small id="emailHelp" class="form-text text-muted"></small>
                 </div>
+                <!--User birthday-->
                 <div class="form-group">
                     <label>Birthday</label>
                     <input class="form-control" type="text" placeholder="<%= user.birthday %>" readonly>
                 </div> 
+                <!--User gender-->
                 <div class="form-group">
                     <label>Gender</label>
                     <input class="form-control" type="text" placeholder="<%= user.gender %>" readonly>
                 </div> 
+                <!--Change password-->
                 <div class="form-group">
                     <label for="exampleInputPassword1">Change Password</label>
                     <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
                 </div>
+                <!--Delete account button-->
                 <a href="#" class="btn btn-danger">Delete Account</button>
+                <!--Save or cancel button-->
                 <a href="/" class="btn btn-primary btn-settings" role="button">Cancel</a>
                 <button type="submit" class="btn btn-primary btn-settings">Save</button>
             </form>

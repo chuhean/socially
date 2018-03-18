@@ -1,5 +1,7 @@
+//Middleware for authentication
 var middlewareObj = {};
 
+//Check whether user has login 
 middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
@@ -7,6 +9,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     res.redirect("/login");
 }
 
+//Check whether user has not login 
 middlewareObj.isNotLoggedIn = function(req, res, next){
     if(!req.isAuthenticated()){
         return next();

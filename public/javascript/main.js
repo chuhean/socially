@@ -1,3 +1,4 @@
+//Ajax when adding post in home page 
 $("#homePagePostForm").submit(function(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -10,19 +11,21 @@ $("#homePagePostForm").submit(function(e) {
       contentType: "application/json",
       data: JSON.stringify(sendData)
   }).done(function(result){
-      updateHomePage("homePagePosts", result);
+      updateHomePage("homePagePosts", result.html);
+      updateHomePage("userPostsLength", result.userPostsLength);
       removeTextFromInput("homePagePostInput");
   }).fail(function(err){
       console.log(err);
   });
 });
 
-$(".homePageCommentForm").submit(function(e) {
+//Ajax when adding comment in each post in home page 
+$(document).on('submit','.homePageCommentForm', function(e) {
   e.preventDefault();
   e.stopPropagation();
-  var id = this.id;
+  var id = $(this).attr('id');
   var sendData = {
-        comment: {text: $("#" + this.id + "-homePageCommentInput").val()}
+        comment: {text: $("#" + id + "-homePageCommentInput").val()}
       };
   var url = "/main/home/comment/" + id;
   $.ajax({
@@ -31,17 +34,61 @@ $(".homePageCommentForm").submit(function(e) {
       contentType: "application/json",
       data: JSON.stringify(sendData)
   }).done(function(result){
-      updateHomePage(id + "-homePageComments", result);
+      updateHomePage(id + "-homePageComments", result.html);
+      updateHomePage(id + "-homePageCommentsNumber", result.postCommentsLength);
       removeTextFromInput(id + "-homePageCommentInput");
   }).fail(function(err){
       console.log(err);
   });
 });
 
+//Ajax when clicking like in each post in home page 
+$(document).on('click','.homePagePostLike', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  var id = $(this).attr('id');
+  var url = "/main/home/like/" + id;
+  $.ajax({
+      url: url,
+      type: "POST",
+  }).done(function(result){
+      updateHomePage(id + "-homePageLikesNumber", result);
+  }).fail(function(err){
+      console.log(err);
+  });
+});
+
+//Ajax for search bar
+$("#search").keyup(function(){
+  $("#searchResult").html('');
+  var sendData = {
+        query: $("#search").val()
+      };
+  var url = "/main/search";
+  $.ajax({
+      url: url,
+      type: "GET",
+      data: JSON.stringify(sendData)
+  }).done(function(result){
+      if(result.length === 0){
+        $("#searchResult").append('<p>No Results</p>')
+      } else {
+        result.forEach(function(user){
+          $("#searchResult").append('<a href="/profile/' + user.id + '">' + user.firstName + ' ' + user.lastName + '</a>')
+        });
+      }
+  }).fail(function(err){
+      console.log(err);
+  });
+  
+});
+
+//Change the inner HTML
 var updateHomePage = function(id, posts){
   document.getElementById(id).innerHTML = posts;
 };
 
+//Remove the "value" from the post/comment input box
 var removeTextFromInput = function(input){
   var removeThis = document.getElementById(input);
   removeThis.value = ""; 

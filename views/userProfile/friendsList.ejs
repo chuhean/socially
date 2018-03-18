@@ -4,6 +4,7 @@
         
 <div class="col-6 columns">
     <div class="card card-center">
+        <!--Search bar for friends list-->
         <div class="card-header card-post">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
             placeholder="Search friends list...">
@@ -17,6 +18,7 @@
                 <h4>Your Friends</h4>
             <% } %>
             <hr>
+            <!--User's friends list-->
             <% user.friends.forEach(function(friend){ %>
                 <div class="card card-center">
                     <div class="card-body">

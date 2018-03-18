@@ -1,5 +1,6 @@
+<!--Get comment details and render them here-->
 <ul class="list-group list-group-flush">
-    <% friendPosts.comments.forEach(function(comment){ %>
+    <% posts.comments.forEach(function(comment){ %>
         <div class="card-header">
             <p class="comment-section"><strong><%= comment.author.firstName %> <%= comment.author.lastName %>:</strong> <%= comment.text %></p>
         </div>
