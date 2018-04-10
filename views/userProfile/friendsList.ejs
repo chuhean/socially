@@ -3,14 +3,14 @@
 <% include ../partials/leftColumn %>
         
 <div class="col-6 columns">
-    <div class="card card-center">
+    <div class="card card-center shadow">
         <!--Search bar for friends list-->
         <div class="card-header card-post">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
             placeholder="Search friends list...">
         </div>
     </div>
-    <div class="card card-center">
+    <div class="card card-center shadow">
         <div class="card-body">
             <% if(!currentUser){ %>
                 <h4><%= user.firstName %>'s Friends</h4>

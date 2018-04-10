@@ -1,6 +1,6 @@
 <!--Get user's friendPosts and render them in place-->
 <% user.friendPosts.forEach(function(posts){ %>
-    <div class="card card-center">
+    <div class="card card-center shadow">
         <div class="card-body">
             <h5 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= posts.author.firstName %> <%= posts.author.lastName %></a></h5>
             <h6 class="card-subtitle mb-2 text-muted"><%= moment(posts.date).format("YYYY-MM-DD HH:mm") %></h6>

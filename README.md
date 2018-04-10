@@ -1,9 +1,9 @@
 1. Design website
-2. Set up views
+2. Set up skeleton and component views
 3. Set up RESTful routes
 4. Set up models and authetication
     - add friend
-    - messages
+    - messages, pushing data to all browsers
     - notification
 5. Optimization, cleaning up, write comment
 6. Testing: functionality, DB, security, performance (front & back, DB), cross-browser 
