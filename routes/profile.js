@@ -17,9 +17,6 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
               path: 'author',  
             },
             {
-                path: 'likes',
-            },
-            {
                 path: 'comments',
                 populate: [{
                     path: 'author'
@@ -31,7 +28,7 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //Render profile page and send back to user
-            res.render("userProfile/profile", {user: user, moment: moment}); 
+            res.render("userProfile/profile", {user: user, currentUserID: req.user._id, moment: moment}); 
         }
     });
 }); 

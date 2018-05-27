@@ -36,13 +36,13 @@ mongoose.connect("mongodb://localhost/socially");
 //======================================================
 //UTILIZE IMPORTED FUNCTIONS
 //======================================================
+app.use(compression());
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(helmet());
-app.use(compression());
 
 //======================================================
 //PASSPORTJS CONFIGURATION

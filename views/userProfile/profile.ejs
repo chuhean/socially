@@ -10,7 +10,13 @@
                 <h5 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= posts.author.firstName %> <%= posts.author.lastName %></a></h5>
                 <h6 class="card-subtitle mb-2 text-muted"><%= moment(posts.date).format("YYYY-MM-DD HH:mm") %></h6>
                 <p class="card-text"><%= posts.text %></p>
-                <a href="#" class="card-link homePagePostLike" id="<%= posts._id %>"><i class="far fa-thumbs-up"></i>
+                <a href="#" class="card-link homePagePostLike" id="<%= posts._id %>">
+                    <!--If user appears in the post's likes array then change the style of "like" to solid blue-->
+                    <% if (posts.likes.indexOf(user._id) === -1){ %>
+                        <i id="<%= posts._id %>-farThumbsUp" class="far fa-thumbs-up"></i> 
+                    <% } else { %>
+                        <i id="<%= posts._id %>-fasThumbsUp" class="fas fa-thumbs-up"></i> 
+                    <% } %>
                     <span id="<%= posts._id %>-homePageLikesNumber">
                         <%= posts.likes.length %>
                     </span> 

@@ -35,8 +35,9 @@ router.post("/signup", middleware.isNotLoggedIn, function(req, res){
         birthday: req.body.birthday, 
         gender: req.body.gender,
     });
-    //*check if password matches confirm password*
-    User.register(newUser, req.body.password, function(err, user){
+    //Check if password matches confirm password
+    if (String(req.body.password) === String(req.body.confirmPassword)){
+        User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
             return res.render("signup");
@@ -45,6 +46,9 @@ router.post("/signup", middleware.isNotLoggedIn, function(req, res){
             res.redirect("/main/home");
         });
     });
+    } else {
+        res.redirect("signup")
+    }
 });
 
 //handling login logic
@@ -59,7 +63,6 @@ router.post("/login", middleware.isNotLoggedIn, passport.authenticate("local",
 //=========================================================
 //AUTH ROUTES FOR LOGOUT
 //=========================================================
-
 //logout route
 router.get("/logout", function(req, res){
     req.logout();

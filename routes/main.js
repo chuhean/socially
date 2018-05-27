@@ -19,9 +19,6 @@ router.get("/home", middleware.isLoggedIn, function(req, res){
                 path: 'author',
             },
             {
-                path: 'likes',
-            },
-            {
                 path: 'comments',
                 populate: [{
                     path: 'author'

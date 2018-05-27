@@ -48,11 +48,22 @@ $(document).on('click','.homePagePostLike', function(e) {
   e.stopPropagation();
   var id = $(this).attr('id');
   var url = "/main/home/like/" + id;
+  // var initialLikes = document.getElementById(`${id}-homePageLikesNumber`).innerHTML;
   $.ajax({
       url: url,
       type: "POST",
   }).done(function(result){
-      updateHomePage(id + "-homePageLikesNumber", result);
+      updateHomePage(`${id}-homePageLikesNumber`, result);
+      //Check if farThumbsUp exists
+      if ($(`#${id}-farThumbsUp`).length){
+        updateHomePageOuter(`${id}-farThumbsUp`, 
+          `<i id="${id}-fasThumbsUp" class="fas fa-thumbs-up"></i>`
+        );
+      } else {
+        updateHomePageOuter(`${id}-fasThumbsUp`, 
+          `<i id="${id}-farThumbsUp" class="far fa-thumbs-up"></i>`
+        );
+      }
   }).fail(function(err){
       console.log(err);
   });
@@ -86,6 +97,11 @@ $("#search").keyup(function(){
 //Change the inner HTML
 var updateHomePage = function(id, posts){
   document.getElementById(id).innerHTML = posts;
+};
+
+//Change the Outer HTML
+var updateHomePageOuter = function(id, posts){
+  document.getElementById(id).outerHTML = posts;
 };
 
 //Remove the "value" from the post/comment input box
