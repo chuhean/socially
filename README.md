@@ -1,3 +1,6 @@
+Socially - A social media platform for connecting with friends.
+
+Tasks:
 1. Design website
 2. Plan CSS elements and structures
 3. Set up skeleton and component views
@@ -8,7 +11,7 @@
     - messages
 6. Optimization, cleaning up, write comment
 7. Testing: functionality, DB, REST API, security, performance (front & back, DB), cross-browser, audit
-8. Documentation & maintenance 
+8. Documentation, maintenance & updating code
 
 Recommendation system/ delete stuff or account/ websocket
 
