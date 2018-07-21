@@ -33,7 +33,7 @@
                     </div>
                     <!--Add friend or message-->
                     <% if(String(user._id) !== String(currentUser._id)){ %>
-                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i> Add Friend</a>
+                        <a href="#" id="<%= user._id %>" class="btn btn-primary btn-sm addFriendButton"><i class="fas fa-user"></i> Add Friend</a>
                         <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-comments"></i> Message</a>
                     <% } %>
                 </div>

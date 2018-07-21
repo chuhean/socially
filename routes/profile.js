@@ -34,6 +34,35 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
 }); 
 
 //======================================================
+//ADD FRIEND PROFILE ROUTES
+//======================================================
+router.post("/:id", middleware.isLoggedIn, function(req, res){
+    //Find user and populate details
+    User
+        .findById(req.params.id)
+        .populate({
+            path: 'posts',
+            populate: [{
+              path: 'author',  
+            },
+            {
+                path: 'comments',
+                populate: [{
+                    path: 'author'
+                }]
+            }]
+        })
+    .exec(function(err, user){
+        if(err || !user){
+            console.log(err);
+        } else {
+            //Render profile page and send back to user
+            res.render("userProfile/profile", {user: user, currentUserID: req.user._id, moment: moment}); 
+        }
+    });
+}); 
+
+//======================================================
 //FRIENDS LIST ROUTES
 //======================================================
 router.get("/:id/friendslist", middleware.isLoggedIn, function(req, res){

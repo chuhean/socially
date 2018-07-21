@@ -48,7 +48,6 @@ $(document).on('click','.homePagePostLike', function(e) {
   e.stopPropagation();
   var id = $(this).attr('id');
   var url = "/main/home/like/" + id;
-  // var initialLikes = document.getElementById(`${id}-homePageLikesNumber`).innerHTML;
   $.ajax({
       url: url,
       type: "POST",
@@ -64,6 +63,23 @@ $(document).on('click','.homePagePostLike', function(e) {
           `<i id="${id}-farThumbsUp" class="far fa-thumbs-up"></i>`
         );
       }
+  }).fail(function(err){
+      console.log(err);
+  });
+});
+
+//Ajax when clicking Add Friend Button
+$(document).on('click','.addFriendButton', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  var id = $(this).attr('id');
+  var url = "/profile/" + id;
+  $.ajax({
+      url: url,
+      type: "POST",
+  }).done(function(result){
+
+      
   }).fail(function(err){
       console.log(err);
   });
@@ -91,7 +107,6 @@ $("#search").keyup(function(){
   }).fail(function(err){
       console.log(err);
   });
-  
 });
 
 //Change the inner HTML
