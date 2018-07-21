@@ -13,7 +13,7 @@ Tasks:
 7. Testing: functionality, DB, REST API, security, performance (front & back, DB), cross-browser, audit
 8. Documentation, maintenance & updating code
 
-Recommendation system/ delete stuff or account/ websocket
+Recommendation system/ delete stuff or account/ auto update for posts
 
 Users:
 john@mail.com
