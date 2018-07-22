@@ -7,7 +7,6 @@ Tasks:
 4. Set up RESTful routes
 5. Set up models and authetication
     - add friend
-    - notification
     - messages
 6. Optimization, cleaning up, write comment
 7. Testing: functionality, DB, REST API, security, performance (front & back, DB), cross-browser, audit

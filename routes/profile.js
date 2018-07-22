@@ -34,33 +34,34 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
 }); 
 
 //======================================================
-//ADD FRIEND PROFILE ROUTES
+//ADD FRIEND ROUTES
 //======================================================
 router.post("/:id", middleware.isLoggedIn, function(req, res){
     //Find user and populate details
-    User
-        .findById(req.params.id)
-        .populate({
-            path: 'posts',
-            populate: [{
-              path: 'author',  
-            },
-            {
-                path: 'comments',
-                populate: [{
-                    path: 'author'
-                }]
-            }]
-        })
-    .exec(function(err, user){
-        if(err || !user){
+    User.findById(req.user._id, function(err, foundUser){
+        if(err || !foundUser){
             console.log(err);
         } else {
-            //Render profile page and send back to user
-            res.render("userProfile/profile", {user: user, currentUserID: req.user._id, moment: moment}); 
-        }
+            //Check if the friend's id already in user's friends array
+            var isInArray = foundUser.friends.some(function (friend) {
+                return friend.equals(req.params.id);
+            });
+            
+            //If friend's id does not exist in array
+            if (isInArray === false){
+                //Add friend's id to user's friends array 
+                foundUser.friends.unshift(req.params.id);
+                foundUser.save(function(err){
+                    if(err){
+                        console.log(err);
+                    } else {
+                        //Send back the number of user's id in likes array
+                        //res.send doesn't accept integer so convert to string
+                        res.send(String(foundPost.likes.length));
+                    }
+                });
     });
-}); 
+});
 
 //======================================================
 //FRIENDS LIST ROUTES
