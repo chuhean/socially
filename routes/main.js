@@ -108,7 +108,6 @@ router.get("/home/ajaxpost", middleware.isLoggedIn, function(req, res) {
         .findById(req.user._id)
         .populate({
             path: 'friendPosts',
-            path: 'posts',
             populate: [{
                 path: 'author',
             },
