@@ -38,12 +38,12 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
 //======================================================
 router.post("/:id", middleware.isLoggedIn, function(req, res){
     //Find user and populate details
-    User.findById(req.user._id, function(err, foundUser){
+    User.findById(req.user._id).populate("friendPosts").exec(function(err, foundUser){
         if(err || !foundUser){
             console.log(err);
         } else {
             //Check if the friend's id already in user's friends array
-            var isInArray = foundUser.friends.some(function (friend) {
+            var isInArray = foundUser.friends.some(function(friend) {
                 return friend.equals(req.params.id);
             });
             
@@ -51,15 +51,45 @@ router.post("/:id", middleware.isLoggedIn, function(req, res){
             if (isInArray === false){
                 //Add friend's id to user's friends array 
                 foundUser.friends.unshift(req.params.id);
-                foundUser.save(function(err){
-                    if(err){
+                
+                
+                User.findById(req.params.id).populate("friendPosts").exec(function(err, foundFriend){
+                    if (err){
                         console.log(err);
                     } else {
-                        //Send back the number of user's id in likes array
-                        //res.send doesn't accept integer so convert to string
-                        res.send(String(foundPost.likes.length));
-                    }
+                    //Add user's id to friend's 'friends' array
+                    foundFriend.friends.unshift(req.user._id);
+                    
+                    //Add all of friend's posts to user's 'friendPosts' array
+                    foundUser.friendPosts = foundFriend.posts.concat(foundUser.friendPosts);
+                    //Sort user's 'friendPosts' by date
+                    foundUser.friendPosts.sort(function(a, b){return b.date - a.date});
+                    
+                    //Add all of user's posts to friend's 'friendPosts' array
+                    foundFriend.friendPosts = foundUser.posts.concat(foundFriend.friendPosts);
+                    //Sort Friend's 'friendPosts' by date
+                    foundFriend.friendPosts.sort(function(a, b){return b.date - a.date});
+                    
+                    //Save user to database 
+                    foundUser.save(function(err){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            foundFriend.save(function(err){
+                                if(err){
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    });
+                    }        
                 });
+                
+                //Send back response to user
+                //This is asynchonous with the above operations to prevent database query delay user response
+                res.send({html: '<a href="#" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Friend</a>'});
+            }
+        }
     });
 });
 
