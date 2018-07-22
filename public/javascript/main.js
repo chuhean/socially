@@ -78,8 +78,7 @@ $(document).on('click','.addFriendButton', function(e) {
       url: url,
       type: "POST",
   }).done(function(result){
-
-      
+    updateHomePageOuter(id, result.html);
   }).fail(function(err){
       console.log(err);
   });
