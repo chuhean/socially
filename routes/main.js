@@ -67,7 +67,7 @@ router.get("/notifications", middleware.isLoggedIn, function(req, res){
 //======================================================
 router.post("/home", middleware.isLoggedIn, function(req, res){
     //Find user
-    User.findById(req.user._id).populate("friends").exec(function(err, currentUser){
+    User.findById(req.user._id, function(err, currentUser){
         if(err || !currentUser){
             console.log(err);
         } else {
@@ -84,8 +84,19 @@ router.post("/home", middleware.isLoggedIn, function(req, res){
                             //Save post to user details
                             currentUser.posts.unshift(savedPost._id);
                             currentUser.friendPosts.unshift(savedPost._id);
-                            currentUser.friends.forEach(function(friend){
-                                friend.friendPosts.unshift(savedPost._id);
+                            currentUser.friends.forEach(function(friendId){
+                                User.findById(friendId, function(err, friendUser){
+                                    if (err){
+                                        console.log(err);
+                                    } else {
+                                        friendUser.friendPosts.unshift(savedPost._id);
+                                        friendUser.save(function(err){
+                                            if (err){
+                                                console.log(err);
+                                            }
+                                        });
+                                    }
+                                });
                             });
                             currentUser.save(function(err){
                                 if(err){

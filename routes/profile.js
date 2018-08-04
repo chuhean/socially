@@ -27,6 +27,10 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
         if(err || !user){
             console.log(err);
         } else {
+            //Check if the friend's id already in user's friends array
+            var isInArray = user.friends.some(function(friend){
+                return friend.equals(req.params.id);
+            });
             //Render profile page and send back to user
             res.render("userProfile/profile", {user: user, currentUserID: req.user._id, moment: moment}); 
         }
@@ -43,7 +47,7 @@ router.post("/:id", middleware.isLoggedIn, function(req, res){
             console.log(err);
         } else {
             //Check if the friend's id already in user's friends array
-            var isInArray = foundUser.friends.some(function(friend) {
+            var isInArray = foundUser.friends.some(function(friend){
                 return friend.equals(req.params.id);
             });
             
@@ -51,8 +55,7 @@ router.post("/:id", middleware.isLoggedIn, function(req, res){
             if (isInArray === false){
                 //Add friend's id to user's friends array 
                 foundUser.friends.unshift(req.params.id);
-                
-                
+
                 User.findById(req.params.id).populate("friendPosts").exec(function(err, foundFriend){
                     if (err){
                         console.log(err);
