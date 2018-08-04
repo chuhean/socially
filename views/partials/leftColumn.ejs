@@ -31,9 +31,14 @@
                             </span>
                         </a>
                     </div>
-                    <!--Add friend or message-->
+                    <!--Check if the 'user' in the page is the actual current user viewing it-->
                     <% if(String(user._id) !== String(currentUser._id)){ %>
-                        <a href="#" id="<%= user._id %>" class="btn btn-primary btn-sm addFriendButton"><i class="fas fa-user"></i> Add Friend</a>
+                        <!--Check if user is friend with the person or not-->
+                        <% if(friendStatus === true){ %>
+                            <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-check"></i> Friend</a>
+                        <% } else {%>
+                            <a href="#" id="<%= user._id %>" class="btn btn-primary btn-sm addFriendButton"><i class="fas fa-user"></i> Add Friend</a>
+                        <% } %>
                         <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-comments"></i> Message</a>
                     <% } %>
                 </div>

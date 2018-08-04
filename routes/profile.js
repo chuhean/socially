@@ -27,12 +27,12 @@ router.get("/:id", middleware.isLoggedIn, function(req, res){
         if(err || !user){
             console.log(err);
         } else {
-            //Check if the friend's id already in user's friends array
+            //Check if the user's id already in friend's 'friends' array
             var isInArray = user.friends.some(function(friend){
-                return friend.equals(req.params.id);
+                return friend.equals(req.user._id);
             });
             //Render profile page and send back to user
-            res.render("userProfile/profile", {user: user, currentUserID: req.user._id, moment: moment}); 
+            res.render("userProfile/profile", {user: user, currentUserID: req.user._id, friendStatus: isInArray, moment: moment}); 
         }
     });
 }); 
