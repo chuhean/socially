@@ -15,6 +15,7 @@ Recommendation system/ notification mention/ auto update for posts
 Users:
 john@mail.com
 alice@mail.com
+david@mail.com
 
 *git add, commit and push to github
 *HTML, CSS, JS, NodeJS, MongoDB, ExpressJS, Mongoose, Ajax

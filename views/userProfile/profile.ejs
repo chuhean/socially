@@ -3,45 +3,49 @@
 <% include ../partials/leftColumn %>
         
 <div class="col-6 columns">
-    <!--Get user details and render them in place-->
-    <% user.posts.forEach(function(posts){ %>
-        <div class="card card-center shadow">
-            <div class="card-body">
-                <h5 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= posts.author.firstName %> <%= posts.author.lastName %></a></h5>
-                <h6 class="card-subtitle mb-2 text-muted"><%= moment(posts.date).format("YYYY-MM-DD HH:mm") %></h6>
-                <p class="card-text"><%= posts.text %></p>
-                <a href="#" class="card-link homePagePostLike" id="<%= posts._id %>">
-                    <!--If user appears in the post's likes array then change the style of "like" to solid blue-->
-                    <% if (posts.likes.indexOf(user._id) === -1){ %>
-                        <i id="<%= posts._id %>-farThumbsUp" class="far fa-thumbs-up"></i> 
-                    <% } else { %>
-                        <i id="<%= posts._id %>-fasThumbsUp" class="fas fa-thumbs-up"></i> 
-                    <% } %>
-                    <span id="<%= posts._id %>-homePageLikesNumber">
-                        <%= posts.likes.length %>
-                    </span> 
-                </a>
-                <a href="#" class="card-link homePagePostComment" id="<%= posts._id %>"><i class="far fa-comment"></i> 
-                    <span id="<%= posts._id %>-homePageCommentsNumber">
-                        <%= posts.comments.length %>
-                    </span>
-                </a>
-                <a href="#" class="card-link"><i class="far fa-share-square"></i></a>
+    <!--Check if user is friend with the person or not, or whether the actual user is viewing its own profile. 
+        If they are friends then show the friend's posts.-->
+    <% if(friendStatus === true || String(user._id) === String(currentUser._id)){ %>
+        <!--Get user details and render them in place-->
+        <% user.posts.forEach(function(posts){ %>
+            <div class="card card-center shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="/profile/<%= user._id %>" class="post-user"><%= posts.author.firstName %> <%= posts.author.lastName %></a></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= moment(posts.date).format("YYYY-MM-DD HH:mm") %></h6>
+                    <p class="card-text"><%= posts.text %></p>
+                    <a href="#" class="card-link homePagePostLike" id="<%= posts._id %>">
+                        <!--If user appears in the post's likes array then change the style of "like" to solid blue-->
+                        <% if (posts.likes.indexOf(user._id) === -1){ %>
+                            <i id="<%= posts._id %>-farThumbsUp" class="far fa-thumbs-up"></i> 
+                        <% } else { %>
+                            <i id="<%= posts._id %>-fasThumbsUp" class="fas fa-thumbs-up"></i> 
+                        <% } %>
+                        <span id="<%= posts._id %>-homePageLikesNumber">
+                            <%= posts.likes.length %>
+                        </span> 
+                    </a>
+                    <a href="#" class="card-link homePagePostComment" id="<%= posts._id %>"><i class="far fa-comment"></i> 
+                        <span id="<%= posts._id %>-homePageCommentsNumber">
+                            <%= posts.comments.length %>
+                        </span>
+                    </a>
+                    <a href="#" class="card-link"><i class="far fa-share-square"></i></a>
+                </div>
+                <!--Comment input box-->
+                <div class="card-header">
+                    <form id="<%= posts._id %>" class="homePageCommentForm">
+                        <input type="text" class="form-control" id="<%= posts._id %>-homePageCommentInput" class="homePageCommentInput" name="comment[text]" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
+                               placeholder="Write a comment...">
+                        <input type="button" id="<%= posts._id %>-homePageCommentButton" class="homePageCommentButton" style="display:none">
+                    </form>
+                </div>
+                <!--Comments section-->
+                <div id="<%= posts._id %>-homePageComments" class="homePageComments">
+                    <% include ../ajaxSnippets/mainHomeComment %>
+                </div>
             </div>
-            <!--Comment input box-->
-            <div class="card-header">
-                <form id="<%= posts._id %>" class="homePageCommentForm">
-                    <input type="text" class="form-control" id="<%= posts._id %>-homePageCommentInput" class="homePageCommentInput" name="comment[text]" aria-label="Default" aria-describedby="inputGroup-sizing-default" 
-                           placeholder="Write a comment...">
-                    <input type="button" id="<%= posts._id %>-homePageCommentButton" class="homePageCommentButton" style="display:none">
-                </form>
-            </div>
-            <!--Comments section-->
-            <div id="<%= posts._id %>-homePageComments" class="homePageComments">
-                <% include ../ajaxSnippets/mainHomeComment %>
-            </div>
-        </div>
-    <% }); %>
+        <% }); %>
+    <% } %>
 </div>
         
 <% include ../partials/rightColumn %>
