@@ -29,7 +29,7 @@ router.get("/", middleware.isLoggedInHome, function(req, res){
         if(err || !currentUser){
             console.log(err);
         } else {
-            res.render("main/home", {user: currentUser, page:"main/home", moment: moment}); 
+            res.render("main/home", {user: currentUser, page:"home", moment: moment}); 
         }
     });
 });
@@ -43,7 +43,7 @@ router.get("/messages", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("back");
         } else {
-            res.render("main/messages", {page:"main/messages"});
+            res.render("main/messages", {page:"messages"});
         }
     });
 }); 
@@ -57,7 +57,7 @@ router.get("/notifications", middleware.isLoggedIn, function(req, res){
             console.log(err);
             res.redirect("back");
         } else {
-            res.render("main/notifications", {user: currentUser, page:"main/notifications"}); 
+            res.render("main/notifications", {user: currentUser, page:"notifications"}); 
         }
     });
 }); 
@@ -102,7 +102,7 @@ router.post("/home", middleware.isLoggedIn, function(req, res){
                                 if(err){
                                     console.log(err);
                                 } else {
-                                    res.redirect("/main/home/ajaxpost");
+                                    res.redirect("/home/ajaxpost");
                                 }
                             });
                         }
@@ -173,7 +173,7 @@ router.post("/home/comment/:id", middleware.isLoggedIn, function(req, res){
                                 if(err){
                                     console.log(err);
                                 } else {
-                                    res.redirect("/main/home/ajaxcomment/" + foundPost._id);
+                                    res.redirect("/home/ajaxcomment/" + foundPost._id);
                                 }
                             });
                         }

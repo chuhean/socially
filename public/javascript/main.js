@@ -6,7 +6,7 @@ $("#homePagePostForm").submit(function(e) {
         post: {text: $("#homePagePostInput").val()}
       };
   $.ajax({
-      url: "/main/home",
+      url: "/home",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(sendData)
@@ -27,7 +27,7 @@ $(document).on('submit','.homePageCommentForm', function(e) {
   var sendData = {
         comment: {text: $("#" + id + "-homePageCommentInput").val()}
       };
-  var url = "/main/home/comment/" + id;
+  var url = "/home/comment/" + id;
   $.ajax({
       url: url,
       type: "POST",
@@ -47,7 +47,7 @@ $(document).on('click','.homePagePostLike', function(e) {
   e.preventDefault();
   e.stopPropagation();
   var id = $(this).attr('id');
-  var url = "/main/home/like/" + id;
+  var url = "/home/like/" + id;
   $.ajax({
       url: url,
       type: "POST",

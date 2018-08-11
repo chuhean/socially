@@ -38,7 +38,7 @@ router.post("/signup", middleware.isNotLoggedIn, function(req, res){
             return res.render("signup");
         }   
         passport.authenticate("local")(req, res, function(){
-            res.redirect("/main/home");
+            res.redirect("/");
         });
     });
     } else {
@@ -49,7 +49,7 @@ router.post("/signup", middleware.isNotLoggedIn, function(req, res){
 //handling login logic
 router.post("/login", middleware.isNotLoggedIn, passport.authenticate("local", 
     {
-        successRedirect: "/main/home",
+        successRedirect: "/",
         failureRedirect: "/login"
         
     }), function(req, res){

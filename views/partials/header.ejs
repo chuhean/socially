@@ -29,14 +29,14 @@
                 
                 <% } else { %>
                     <ul class="navbar-nav">
-                        <li class="nav-item <%= typeof page !== 'undefined' && page === 'main/home' ? 'active' : '' %>">
-                            <a class="nav-link" href="/main/home"><i class="fas fa-home"></i> Home</a>
+                        <li class="nav-item <%= typeof page !== 'undefined' && page === 'home' ? 'active' : '' %>">
+                            <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                         </li>
-                        <li class="nav-item <%= typeof page !== 'undefined' && page === 'main/messages' ? 'active' : '' %>">
-                            <a class="nav-link" href="/main/messages"><i class="fas fa-comments"></i> Messages</a>
+                        <li class="nav-item <%= typeof page !== 'undefined' && page === 'messages' ? 'active' : '' %>">
+                            <a class="nav-link" href="/messages"><i class="fas fa-comments"></i> Messages</a>
                         </li>
-                        <li class="nav-item <%= typeof page !== 'undefined' && page === 'main/notifications' ? 'active' : '' %>">
-                            <a class="nav-link" href="/main/notifications"><i class="fas fa-bell"></i> Notifications</a>
+                        <li class="nav-item <%= typeof page !== 'undefined' && page === 'notifications' ? 'active' : '' %>">
+                            <a class="nav-link" href="/notifications"><i class="fas fa-bell"></i> Notifications</a>
                         </li>
                     </ul>
                     <!--Search bar-->
