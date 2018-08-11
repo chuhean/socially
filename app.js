@@ -13,6 +13,12 @@ var express         = require("express"),
     compression     = require('compression');
     
 //======================================================
+//MOUNT TO NODEJS SERVER AND CONNECT TO SOCKET.IO
+//======================================================
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+//======================================================
 //IMPORT MONGOOSE MODEL
 //======================================================
 var User            = require("./models/user"),
@@ -62,8 +68,6 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    // res.locals.error = req.flash("error");
-    // res.locals.success = req.flash("success");
     next();
 });
 
@@ -71,12 +75,22 @@ app.use(function(req, res, next){
 //UTILIZING ROUTES
 //======================================================
 app.use("/", indexRoutes);
-app.use("/main", mainRoutes);
+app.use("/", mainRoutes);
 app.use("/profile", profileRoutes);
 app.use("/settings", settingsRoutes);
 
 //======================================================
+//UTILIZING SOCKET.IO FOR EACH CONNECTIONS
+//======================================================
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
+//======================================================
 //INITIATE NODEJS TO START LISTENING REQUEST
 //======================================================
-app.listen(process.env.PORT, process.env.IP);
+server.listen(process.env.PORT, function(){
+  console.log('listening on *:3000');
+});
+
 

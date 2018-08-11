@@ -7,11 +7,6 @@ var User        = require("../models/user");
 //======================================================
 //LANDING, LOGIN, SIGN UP ROUTES
 //======================================================
-//show landing page
-router.get("/", middleware.isNotLoggedIn, function(req, res){
-    res.render("landing"); 
-});
-
 //show login form
 router.get("/login", middleware.isNotLoggedIn, function(req, res){
     res.render("login");

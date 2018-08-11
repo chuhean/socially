@@ -18,4 +18,4 @@ alice@mail.com
 david@mail.com
 
 *git add, commit and push to github
-*HTML, CSS, JS, NodeJS, MongoDB, ExpressJS, Mongoose, Ajax
+*HTML, CSS, JS, NodeJS, MongoDB, ExpressJS, Mongoose, Ajax, Socket.io

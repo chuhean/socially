@@ -9,7 +9,7 @@ var moment      = require("moment");
 //======================================================
 //MAIN HOME PAGE ROUTES
 //======================================================
-router.get("/home", middleware.isLoggedIn, function(req, res){
+router.get("/", middleware.isLoggedInHome, function(req, res){
     //Populate user details
     User
         .findById(req.user._id)
