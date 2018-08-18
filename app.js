@@ -11,12 +11,6 @@ var express         = require("express"),
     methodOverride  = require("method-override"),
     helmet          = require("helmet"),
     compression     = require('compression');
-    
-//======================================================
-//MOUNT TO NODEJS SERVER AND CONNECT TO SOCKET.IO
-//======================================================
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
 
 //======================================================
 //IMPORT MONGOOSE MODEL
@@ -33,6 +27,7 @@ var indexRoutes     = require("./routes/index");
 var mainRoutes      = require("./routes/main");
 var profileRoutes   = require("./routes/profile");
 var settingsRoutes  = require("./routes/settings");
+var messagesRoutes  = require("./routes/messages");
 
 //======================================================
 //CONNECT APPJS TO MONGODB DATABASE
@@ -72,25 +67,42 @@ app.use(function(req, res, next){
 });
 
 //======================================================
+//MOUNT TO NODEJS SERVER AND CONNECT TO SOCKET.IO
+//======================================================
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+//======================================================
+//CREATE 'MESSAGES' NAMESPACE IN SOCKET.IO
+//======================================================
+var middleware  = require("./middleware");
+var msg = io.of('/messages');
+msg.on('connection', function(socket){
+  console.log('someone connected');
+//   msg.clients((error, clients) => {
+//       if (error) throw error;
+//       console.log(clients); 
+//     });
+});
+msg.use((socket, next) => {
+  if (middleware.isLoggedIn) return next();
+  next(new Error('Authentication error'));
+});
+msg.emit('hi', 'everyone!');
+
+//======================================================
 //UTILIZING ROUTES
 //======================================================
 app.use("/", indexRoutes);
 app.use("/", mainRoutes);
+app.use("/messages", messagesRoutes);
 app.use("/profile", profileRoutes);
 app.use("/settings", settingsRoutes);
-
-//======================================================
-//UTILIZING SOCKET.IO FOR EACH CONNECTIONS
-//======================================================
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
 
 //======================================================
 //INITIATE NODEJS TO START LISTENING REQUEST
 //======================================================
 server.listen(process.env.PORT, function(){
-  console.log('listening on *:3000');
 });
 
 
