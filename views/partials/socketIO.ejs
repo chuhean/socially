@@ -1,5 +1,33 @@
 <!--Socket.io-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 <script>
-  var socket = io('/messages');
+$(function () {
+    var socket = io('/messages');
+    $('#formMessage').submit(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('#messagesHistory').append(`
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p>${$('#textMessage').val()}</p>
+                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+            </div>
+        `);
+        socket.emit('message', $('#textMessage').val());
+        $('#textMessage').val('');
+        return false;
+    });
+    socket.on('message', function(msg){
+        console.log(msg);
+        $('#messagesHistory').append(`
+            <div class="incoming_msg">
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>${msg}</p>
+                  <span class="time_date"> 11:01 AM    |    June 9</span></div>
+              </div>
+            </div>
+        `);
+    });
+});
 </script>

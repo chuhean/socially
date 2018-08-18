@@ -77,18 +77,22 @@ var io = require('socket.io')(server);
 //======================================================
 var middleware  = require("./middleware");
 var msg = io.of('/messages');
-msg.on('connection', function(socket){
-  console.log('someone connected');
+
+msg.on('connection', function (socket) {
+    socket.on('message', function(msg){
+        socket.broadcast.emit('message', msg);
+    });
+});
+
 //   msg.clients((error, clients) => {
 //       if (error) throw error;
 //       console.log(clients); 
 //     });
-});
+
 msg.use((socket, next) => {
   if (middleware.isLoggedIn) return next();
   next(new Error('Authentication error'));
 });
-msg.emit('hi', 'everyone!');
 
 //======================================================
 //UTILIZING ROUTES
