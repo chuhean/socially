@@ -74,30 +74,36 @@ var io = require('socket.io')(server);
 //======================================================
 var middleware  = require("./middleware"),
     sharedsession = require("express-socket.io-session"),
-    msg = io.of('/messages').use(sharedsession(session, {
-        autoSave: true
-    })),
     onlineUsers = [];
+    
+io.use(sharedsession(session));
 
-msg.use((socket, next) => {
-    console.log('middleware')
+//Check user authentication before socket connection
+io.use((socket, next) => {
     if (middleware.isLoggedIn) return next();
     next(new Error('Authentication error'));
 });
 
-msg.on('connection', function (socket) {
+io.on('connection', function (socket) {
     //Get user id from email, and match it with the assigned socket.id.
     User.find({ email: socket.handshake.session.passport.user }, function (err, user) {
         if (err) {
             console.log(err);
         } else {
-            onlineUsers.push({userID: user._id, userSocketID: socket.id});
+            onlineUsers.push({userID: String(user[0]._id), userSocketID: socket.id});
         }
     });
-    console.log('middleware')
     socket.on('message', function(msg){
-        // let token = socket.handshake.query.token;
-        socket.broadcast.emit('message', msg);
+        let friendId = String(socket.handshake.query.id);
+        let friendObject = onlineUsers.filter(obj => {
+            return obj.userID === friendId;
+        });
+        var friendSocketId = friendObject[0].userSocketID;
+        io.to(friendSocketId).emit('message', msg);
+    });
+    
+    socket.on('disconnect', function(){
+        onlineUsers = onlineUsers.filter(function(el) { return el.userSocketID != socket.id; }); 
     });
 });
 
