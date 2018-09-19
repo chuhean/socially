@@ -84,6 +84,9 @@ io.use((socket, next) => {
     next(new Error('Authentication error'));
 });
 
+//Upon connection for each client, place the client into connecting clients array. 
+//Then receive message and send to corresponding client.
+//Upon disconnection remove from connecting clients array.
 io.on('connection', function (socket) {
     //Get user id from email, and match it with the assigned socket.id.
     User.find({ email: socket.handshake.session.passport.user }, function (err, user) {
