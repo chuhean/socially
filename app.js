@@ -94,6 +94,7 @@ io.on('connection', function (socket) {
             console.log(err);
         } else {
             onlineUsers.push({userID: String(user[0]._id), userSocketID: socket.id});
+            console.log(onlineUsers)
         }
     });
     socket.on('message', function(msg){
@@ -101,6 +102,7 @@ io.on('connection', function (socket) {
         let friendObject = onlineUsers.filter(obj => {
             return obj.userID === friendId;
         });
+        console.log(friendObject)
         var friendSocketId = friendObject[0].userSocketID;
         io.to(friendSocketId).emit('message', msg);
     });
