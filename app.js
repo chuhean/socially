@@ -24,11 +24,11 @@ var User            = require("./models/user");
 //======================================================
 //IMPORT ROUTES
 //======================================================
-var indexRoutes     = require("./routes/index");
-var mainRoutes      = require("./routes/main");
-var profileRoutes   = require("./routes/profile");
-var settingsRoutes  = require("./routes/settings");
-var messagesRoutes  = require("./routes/messages");
+var indexRoutes     = require("./routes/index"),
+    mainRoutes      = require("./routes/main"),
+    profileRoutes   = require("./routes/profile"),
+    settingsRoutes  = require("./routes/settings"),
+    messagesRoutes  = require("./routes/messages");
 
 //======================================================
 //CONNECT APPJS TO MONGODB DATABASE
